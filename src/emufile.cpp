@@ -22,6 +22,10 @@ THE SOFTWARE.
 
 #include "emufile.h"
 
+#ifndef __NO_FILE_SYSTEM__
+#define __NO_FILE_SYSTEM__
+#endif
+
 #ifdef __NO_FILE_SYSTEM__
 
 #include "roms.h" // from $(AM_HOME)/share/games/nes/gen/
@@ -29,7 +33,7 @@ THE SOFTWARE.
 void EMUFILE_FILE::open(const char* fname, const char* mode) {
   struct rom *cur = &roms[0];
   int found = 0;
-  for (int i = 1; i < nroms; i++) {
+  for (int i = 0; i < nroms; i++) {
     if (strcmp(roms[i].name, fname) == 0) {
       cur = &roms[i];
       found = 1;

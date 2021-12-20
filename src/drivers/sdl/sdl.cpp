@@ -14,6 +14,10 @@
 #include "../../types.h"
 #include "../../config.h"
 
+#ifndef __NO_FILE_SYSTEM__
+#define __NO_FILE_SYSTEM__
+#endif
+
 int isloaded;
 
 bool turbo = false;
@@ -47,6 +51,7 @@ int LoadGame(const char *path)
         CloseGame();
     }
 	if(!FCEUI_LoadGame(path, 1)) {
+		printf(": FCEUI_LoadGame failed!\n");
 		return 0;
 	}
 
@@ -54,6 +59,7 @@ int LoadGame(const char *path)
 	RefreshThrottleFPS();
 
 	if(!DriverInitialize(GameInfo)) {
+		printf("DriverInitialize failed!\n");
 		return(0);
 	}
 
@@ -136,6 +142,7 @@ DriverInitialize(FCEUGI *gi)
 static void
 DriverKill()
 {
+	printf(": failed!\n");
 	if(inited&4)
 		KillVideo();
 	inited=0;
@@ -301,6 +308,7 @@ int main(int argc, char *argv[])
   // load the specified game
   error = LoadGame(romname);
   if(error != 1) {
+		printf("LoadGame failed\n");
     DriverKill();
     return -1;
   }

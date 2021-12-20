@@ -28,6 +28,10 @@ THE SOFTWARE.
 #include <stdarg.h>
 #include "types.h"
 
+#ifndef __NO_FILE_SYSTEM__
+#define __NO_FILE_SYSTEM__
+#endif
+
 #ifndef SEEK_SET
 enum {SEEK_SET, SEEK_CUR, SEEK_END};
 #endif

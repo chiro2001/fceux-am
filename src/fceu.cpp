@@ -297,7 +297,10 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode, bool silen
 	FCEU_printf("Loading ...\n\n");
 
 	FCEU_CloseGame();
+
+	FCEU_printf("trying to malloc...\n");
 	GameInfo = (FCEUGI *)malloc(sizeof(FCEUGI));
+	printf("malloc done\n");
 	memset(GameInfo, 0, sizeof(FCEUGI));
 
 	GameInfo->archiveCount = fp->archiveCount;
@@ -312,6 +315,7 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode, bool silen
 	GameInfo->cspecial = SIS_NONE;
 
 	//try to load each different format
+	FCEU_printf("try to load each different format ...\n\n");
 	bool FCEUXLoad(const char *name, FCEUFILE * fp);
 
 	if (iNESLoad(fullname, fp, OverwriteVidMode))
@@ -341,7 +345,7 @@ FCEUGI *FCEUI_LoadGameVirtual(const char *name, int OverwriteVidMode, bool silen
 		}
 	}
 	else {
-		if (!silent)
+		// if (!silent)
 			FCEU_PrintError("An error occurred while loading the file.");
 
 		free(GameInfo);
