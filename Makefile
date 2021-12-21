@@ -13,7 +13,8 @@ CFLAGS    = -DPSS_STYLE=1 -DFRAMESKIP -D__NO_FILE_SYSTEM__
 -include $(NEMU_HOME)/include/config/auto.conf
 -include $(NEMU_HOME)/include/config/auto.conf.cmd
 
-CFLAGS += $(if $(CONFIG_CC_AM_DEBUG),-ggdb3,)
+CFLAGS += $(if $(CONFIG_CC_AM_DEBUG),-g,)
+# CFLAGS += -$(CONFIG_EXT_CC_AM_OPT)
 
 include $(AM_HOME)/Makefile
 

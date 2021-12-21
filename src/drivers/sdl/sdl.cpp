@@ -269,7 +269,7 @@ int main(const char *romname)
 int main(int argc, char *argv[])
 #endif
 {
-  ioe_init();
+	ioe_init();
 
 #ifndef __NO_FILE_SYSTEM__
   const char *romname;
